@@ -23,13 +23,6 @@ export const EUDRCarousel = () => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  const scrollTo = useCallback(
-    (index: number) => {
-      if (emblaApi) emblaApi.scrollTo(index);
-    },
-    [emblaApi]
-  );
-
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -46,7 +39,7 @@ export const EUDRCarousel = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-secondary">
+    <div className="relative w-full h-screen min-h-[560px] md:min-h-[650px] overflow-y-auto md:overflow-hidden bg-secondary">
       {/* Carousel Container */}
       <div className="h-full" ref={emblaRef}>
         <div className="flex h-full">
@@ -74,46 +67,29 @@ export const EUDRCarousel = () => {
         </div>
       </div>
 
-      {/* Navigation Controls */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 z-20">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={scrollPrev}
-          className="rounded-full bg-background/80 backdrop-blur-sm border-primary/20 hover:bg-primary hover:text-primary-foreground transition-smooth"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </Button>
-
-        {/* Progress Dots */}
-        <div className="flex gap-2">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={`h-2 rounded-full transition-smooth ${
-                index === selectedIndex
-                  ? "w-8 bg-primary"
-                  : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={scrollNext}
-          className="rounded-full bg-background/80 backdrop-blur-sm border-primary/20 hover:bg-primary hover:text-primary-foreground transition-smooth"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </Button>
-      </div>
+      {/* Side Navigation Controls */}
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={scrollPrev}
+        className="absolute left-3 sm:left-4 md:left-6 top-auto md:top-1/2 bottom-6 md:bottom-auto -translate-y-0 md:-translate-y-1/2 rounded-full bg-background/80 backdrop-blur-sm border-primary/20 hover:bg-primary hover:text-primary-foreground transition-smooth z-20 shadow-glow"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
+      </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={scrollNext}
+        className="absolute right-3 sm:right-4 md:right-6 top-auto md:top-1/2 bottom-6 md:bottom-auto -translate-y-0 md:-translate-y-1/2 rounded-full bg-background/80 backdrop-blur-sm border-primary/20 hover:bg-primary hover:text-primary-foreground transition-smooth z-20 shadow-glow"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
+      </Button>
 
       {/* Slide Counter */}
-      <div className="absolute top-8 right-8 z-20 text-sm font-medium text-muted-foreground">
-        <span className="text-primary text-2xl font-bold">{selectedIndex + 1}</span>
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 text-xs sm:text-sm font-medium text-muted-foreground bg-background/80 backdrop-blur-sm px-3 py-2 rounded-full border border-primary/10">
+        <span className="text-primary text-xl sm:text-2xl font-bold">{selectedIndex + 1}</span>
         <span className="mx-1">/</span>
         <span>{scrollSnaps.length}</span>
       </div>

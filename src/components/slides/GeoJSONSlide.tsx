@@ -6,19 +6,19 @@ export const GeoJSONSlide = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-tr from-tracex-gray via-secondary to-tracex-gray overflow-hidden">
+    <div className="relative w-full h-full min-h-[560px] md:min-h-[640px] bg-gradient-to-tr from-tracex-gray via-secondary to-tracex-gray overflow-hidden">
       {/* Animated Grid */}
       <div className="absolute inset-0 tech-grid opacity-20" />
 
-      <div className="relative h-full flex items-center justify-center px-8 md:px-16 z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-7xl">
+      <div className="relative h-full flex items-start md:items-center justify-center px-4 sm:px-8 lg:px-16 py-10 md:py-6 xl:py-0 z-10">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-10 items-center max-w-6xl xl:max-w-7xl w-full">
           {/* Left: Interactive Visualization */}
           <div 
-            className="relative cursor-pointer group"
+            className="relative cursor-pointer group w-full max-w-3xl mx-auto md:mx-0"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+            <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
               <span className="text-primary font-semibold text-sm">Step 3: Validation</span>
             </div>
 
@@ -42,20 +42,20 @@ export const GeoJSONSlide = () => {
             </div>
 
             {/* Floating Icons */}
-            <div className="absolute -top-4 -right-4 p-4 rounded-full bg-accent shadow-accent animate-float">
+            <div className="absolute -top-4 -right-4 p-4 rounded-full bg-accent shadow-accent animate-float hidden sm:block">
               <Smartphone className="h-6 w-6 text-accent-foreground" />
             </div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-4 -left-4 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-3xl" />
           </div>
 
           {/* Right: Content */}
-          <div className="space-y-6 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight">
+          <div className="space-y-5 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-primary-foreground leading-tight">
               GeoJSON Capture &<br />
               <span className="text-gradient">Instant Validation</span>
             </h2>
 
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
               Capture precise polygon boundaries via mobile and validate geometry instantly to prevent DDS rejection.
             </p>
 
